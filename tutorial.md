@@ -32,7 +32,7 @@ from temporalio import activity
 from shared import BookVacationInput
 ```
 
-The `asyncio` libarary is used for asynchronous operations.
+The `asyncio` library is used for asynchronous operations.
 The `activity` module form the `temporalio` library provides decorators and functions for defining Activities.
 Then you will import the `BookVacationInput` the data class will be used to pass input data to the Activities.
 
