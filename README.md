@@ -6,11 +6,31 @@ This [tutorial](./tutorial.md) covers the implementation of the Sagas pattern us
 
 To run the example, open four terminal instances and follow the instructions below.
 
+### Prerequisites
+
+Create a virtual environment:
+
+```command
+python3 -m venv venv
+```
+
+Activate your virtual environment:
+
+```command
+source .venv/bin/activate
+```
+
+Install the dependencies:
+
+```command
+pip install -r requirements.txt
+```
+
 ### Step 1: Start Temporal Server
 
 In the first terminal, start the Temporal server in development mode:
 
-```bash
+```command
 temporal server start-dev
 ```
 
@@ -18,7 +38,7 @@ temporal server start-dev
 
 In the second terminal, run the worker script:
 
-```bash
+```command
 python run_worker.py
 ```
 
@@ -26,7 +46,7 @@ python run_worker.py
 
 In the third terminal, run the workflow script:
 
-```bash
+```command
 python run_workflow.py
 ```
 
@@ -36,7 +56,7 @@ In the fourth terminal, run the following `curl` command to initiate a successfu
 
 ### Input
 
-```bash
+```command
 curl -X POST http://localhost:3002/book \
 -H "Content-Type: application/json" \
 -d '{
@@ -67,7 +87,7 @@ To simulate a booking failure, run the following `curl` command in the fourth te
 
 ### Input
 
-```bash
+```command
 curl -X POST http://localhost:3002/book \
 -H "Content-Type: application/json" \
 -d '{
@@ -95,7 +115,7 @@ curl -X POST http://localhost:3002/book \
 
 To format the documentation, run the following command:
 
-```bash
+```command
 dprint fmt -c dprint.json
 ```
 
@@ -103,7 +123,7 @@ dprint fmt -c dprint.json
 
 To format the Python examples in the documentation, run the following command:
 
-```bash
+```command
 blacken-docs tutorial.md
 ```
 
@@ -111,7 +131,7 @@ blacken-docs tutorial.md
 
 To format the code, run the following commands:
 
-```bash
+```command
 isort . && black .
 ```
 
