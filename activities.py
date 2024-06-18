@@ -107,4 +107,3 @@ async def undo_book_flight(book_input: BookVacationInput) -> str:
     """
     print(f"Undoing booking of flight: {book_input.book_flight_id}")
     return f"Undoing booking of flight: {book_input.book_flight_id}"
-

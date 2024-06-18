@@ -56,4 +56,3 @@ if __name__ == "__main__":
         print("\nInterrupt received, shutting down...\n")
         interrupt_event.set()
         loop.run_until_complete(loop.shutdown_asyncgens())
-
