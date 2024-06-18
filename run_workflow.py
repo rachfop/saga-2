@@ -23,8 +23,10 @@ async def get_temporal_client() -> Client:
     """
     return await Client.connect("localhost:7233")
 
+
 def generate_unique_username(name):
     return f'{name.replace(" ", "-").lower()}-{str(uuid.uuid4().int)[:6]}'
+
 
 @app.route("/book", methods=["POST"])
 async def book_vacation():
