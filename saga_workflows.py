@@ -74,3 +74,4 @@ class BookWorkflow:
                     start_to_close_timeout=timedelta(seconds=10),
                 )
             return "Voyage cancelled"
+
