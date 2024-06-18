@@ -23,6 +23,8 @@ async def get_temporal_client() -> Client:
     """
     return await Client.connect("localhost:7233")
 
+def generate_unique_username(name):
+    return f'{name.replace(" ", "-").lower()}-{str(uuid.uuid4().int)[:6]}'
 
 @app.route("/book", methods=["POST"])
 async def book_vacation():
@@ -32,7 +34,7 @@ async def book_vacation():
     Returns:
         Response: JSON response with booking details or error message.
     """
-    user_id = f'{request.json["name"].replace(" ", "-").lower()}-{uuid.uuid4().int % 1_000_000}'
+    user_id = generate_unique_username(request.json.get("name"))
     attempts = request.json.get("attempts")
     car = request.json.get("car")
     hotel = request.json.get("hotel")
