@@ -21,7 +21,7 @@ async def book_car(book_input: BookVacationInput) -> str:
         str: Confirmation message.
     """
     print(f"Booking car: {book_input.book_car_id}")
-    return f"Booked car: {book_input.book_car_id}"
+    return f"{book_input.book_car_id}"
 
 
 @activity.defn
@@ -46,7 +46,7 @@ async def book_hotel(book_input: BookVacationInput) -> str:
         raise ValueError("Invalid hotel booking, rolling back!")
 
     print(f"Booking hotel: {book_input.book_hotel_id}")
-    return f"Booked hotel: {book_input.book_hotel_id}"
+    return f"{book_input.book_hotel_id}"
 
 
 @activity.defn
@@ -61,7 +61,7 @@ async def book_flight(book_input: BookVacationInput) -> str:
         str: Confirmation message.
     """
     print(f"Booking flight: {book_input.book_flight_id}")
-    return f"Booked flight: {book_input.book_flight_id}"
+    return f"{book_input.book_flight_id}"
 
 
 @activity.defn
@@ -76,7 +76,7 @@ async def undo_book_car(book_input: BookVacationInput) -> str:
         str: Confirmation message.
     """
     print(f"Undoing booking of car: {book_input.book_car_id}")
-    return f"Undoing booking of car: {book_input.book_car_id}"
+    return f"{book_input.book_car_id}"
 
 
 @activity.defn
@@ -91,7 +91,7 @@ async def undo_book_hotel(book_input: BookVacationInput) -> str:
         str: Confirmation message.
     """
     print(f"Undoing booking of hotel: {book_input.book_hotel_id}")
-    return f"Undoing booking of hotel: {book_input.book_hotel_id}"
+    return f"{book_input.book_hotel_id}"
 
 
 @activity.defn
@@ -106,4 +106,4 @@ async def undo_book_flight(book_input: BookVacationInput) -> str:
         str: Confirmation message.
     """
     print(f"Undoing booking of flight: {book_input.book_flight_id}")
-    return f"Undoing booking of flight: {book_input.book_flight_id}"
+    return f"{book_input.book_flight_id}"

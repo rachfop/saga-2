@@ -72,12 +72,15 @@ curl -X POST http://localhost:3002/book \
 
 ```json
 {
-  "cancelled": false,
-  "car": "Car: valid-car-id",
-  "flight": "Flight: valid-flight-id",
-  "hotel": "Hotel: valid-hotel-id",
-  "result": "Booked car: valid-car-id Booked hotel: valid-hotel-id Booked flight: valid-flight-id",
-  "user_id": "john-doe-184942"
+  "result": {
+    "message": {
+      "booked_car": "valid-car-id",
+      "booked_flight": "valid-flight-id",
+      "booked_hotel": "valid-hotel-id"
+    },
+    "status": "success"
+  },
+  "user_id": "jane-smith-288524"
 }
 ```
 
@@ -103,9 +106,11 @@ curl -X POST http://localhost:3002/book \
 
 ```json
 {
-  "cancelled": true,
-  "result": "Voyage cancelled",
-  "user_id": "jane-smith-609592"
+  "result": {
+    "message": "Activity task failed",
+    "status": "failure"
+  },
+  "user_id": "jane-smith-935816"
 }
 ```
 
