@@ -15,8 +15,8 @@ from activities import (
     undo_book_flight,
     undo_book_hotel,
 )
-from saga_workflows import BookWorkflow
 from shared import TASK_QUEUE_NAME
+from workflows import BookingWorkflow
 
 interrupt_event = asyncio.Event()
 
@@ -30,7 +30,7 @@ async def main():
     worker = Worker(
         client,
         task_queue=TASK_QUEUE_NAME,
-        workflows=[BookWorkflow],
+        workflows=[BookingWorkflow],
         activities=[
             book_car,
             book_hotel,

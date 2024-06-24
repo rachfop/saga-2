@@ -189,13 +189,13 @@ with workflow.unsafe.imports_passed_through():
     from activities import BookVacationInput, book_car, book_flight, book_hotel
 ```
 
-Next, create the `BookWorkflow` class and define the compensation actions, as well as the functions that execute your core logic: `book_car`, `book_hotel`, and `book_flight`.
+Next, create the `BookingWorkflow` class and define the compensation actions, as well as the functions that execute your core logic: `book_car`, `book_hotel`, and `book_flight`.
 
 These executions are wrapped in a `try` and `except` block to handle any exceptions and trigger compensations.
 
 ```python
 @workflow.defn
-class BookWorkflow:
+class BookingWorkflow:
     @workflow.run
     async def run(self, input: BookVacationInput):
         compensations = []
@@ -285,7 +285,7 @@ from activities import (
     undo_book_flight,
     undo_book_hotel,
 )
-from saga_workflows import BookWorkflow
+from saga_workflows import BookingWorkflow
 from shared import TASK_QUEUE_NAME
 ```
 
@@ -304,7 +304,7 @@ async def main():
     worker = Worker(
         client,
         task_queue=TASK_QUEUE_NAME,
-        workflows=[BookWorkflow],
+        workflows=[BookingWorkflow],
         activities=[
             book_car,
             book_hotel,
@@ -367,7 +367,7 @@ from flask import Flask, jsonify, request
 from temporalio.client import Client
 
 from activities import BookVacationInput
-from saga_workflows import BookWorkflow
+from saga_workflows import BookingWorkflow
 from shared import TASK_QUEUE_NAME
 ```
 
@@ -436,7 +436,7 @@ async def book_vacation():
 
     # Execute the Workflow
     result = await client.execute_workflow(
-        BookWorkflow.run,
+        BookingWorkflow.run,
         input,
         id=user_id,
         task_queue=TASK_QUEUE_NAME,
