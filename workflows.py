@@ -1,7 +1,7 @@
 """
 Module for defining saga workflows.
 """
-
+# @@@SNIPSTART saga-py-workflows-import
 from datetime import timedelta
 
 from temporalio import workflow
@@ -19,6 +19,8 @@ with workflow.unsafe.imports_passed_through():
     )
 
 
+# @@@SNIPEND
+# @@@SNIPSTART saga-py-workflows-run
 @workflow.defn
 class BookingWorkflow:
     """
@@ -44,9 +46,8 @@ class BookingWorkflow:
                 book_car,
                 book_input,
                 start_to_close_timeout=timedelta(seconds=10),
-                retry_policy=RetryPolicy(non_retryable_error_types=["ValueError"]),
             )
-            results['booked_car'] = car_result
+            results["booked_car"] = car_result
 
             # Book hotel
             compensations.append(undo_book_hotel)
@@ -54,9 +55,10 @@ class BookingWorkflow:
                 book_hotel,
                 book_input,
                 start_to_close_timeout=timedelta(seconds=10),
+                maximum_attempts=book_input.attempts,
                 retry_policy=RetryPolicy(non_retryable_error_types=["ValueError"]),
             )
-            results['booked_hotel'] = hotel_result
+            results["booked_hotel"] = hotel_result
 
             # Book flight
             compensations.append(undo_book_flight)
@@ -67,11 +69,9 @@ class BookingWorkflow:
                 retry_policy=RetryPolicy(
                     initial_interval=timedelta(seconds=1),
                     maximum_interval=timedelta(seconds=1),
-                    maximum_attempts=book_input.attempts,
-                    non_retryable_error_types=["ValueError"],
                 ),
             )
-            results['booked_flight'] = flight_result
+            results["booked_flight"] = flight_result
 
             return {"status": "success", "message": results}
 
@@ -83,3 +83,6 @@ class BookingWorkflow:
                     start_to_close_timeout=timedelta(seconds=10),
                 )
             return {"status": "failure", "message": str(ex)}
+
+
+# @@@SNIPEND

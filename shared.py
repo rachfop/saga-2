@@ -1,7 +1,7 @@
 """
 Module for shared data structures and constants.
 """
-
+# @@@SNIPSTART saga-py-shared
 from dataclasses import dataclass
 
 
@@ -15,3 +15,4 @@ class BookVacationInput:
 
 
 TASK_QUEUE_NAME = "saga-task-queue"
+# @@@SNIPEND

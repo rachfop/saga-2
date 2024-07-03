@@ -1,14 +1,17 @@
 """
 Module containing activity implementations for the booking process.
 """
-
+# @@@SNIPSTART saga-py-activities-import
 import asyncio
 
 from temporalio import activity
 
 from shared import BookVacationInput
 
+# @@@SNIPEND
 
+
+# @@@SNIPSTART saga-py-activities-book-car
 @activity.defn
 async def book_car(book_input: BookVacationInput) -> str:
     """
@@ -24,6 +27,8 @@ async def book_car(book_input: BookVacationInput) -> str:
     return f"{book_input.book_car_id}"
 
 
+# @@@SNIPEND
+# @@@SNIPSTART saga-py-activities-book-hotel
 @activity.defn
 async def book_hotel(book_input: BookVacationInput) -> str:
     """
@@ -49,6 +54,8 @@ async def book_hotel(book_input: BookVacationInput) -> str:
     return f"{book_input.book_hotel_id}"
 
 
+# @@@SNIPEND
+# @@@SNIPSTART saga-py-activities-book-flight
 @activity.defn
 async def book_flight(book_input: BookVacationInput) -> str:
     """
@@ -64,6 +71,8 @@ async def book_flight(book_input: BookVacationInput) -> str:
     return f"{book_input.book_flight_id}"
 
 
+# @@@SNIPEND
+# @@@SNIPSTART saga-py-activities-undo-book
 @activity.defn
 async def undo_book_car(book_input: BookVacationInput) -> str:
     """
@@ -107,3 +116,6 @@ async def undo_book_flight(book_input: BookVacationInput) -> str:
     """
     print(f"Undoing booking of flight: {book_input.book_flight_id}")
     return f"{book_input.book_flight_id}"
+
+
+# @@@SNIPEND

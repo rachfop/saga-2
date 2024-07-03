@@ -1,7 +1,7 @@
 """
 Module to run the worker.
 """
-
+# @@@SNIPSTART saga-py-worker-import
 import asyncio
 
 from temporalio.client import Client
@@ -18,6 +18,8 @@ from activities import (
 from shared import TASK_QUEUE_NAME
 from workflows import BookingWorkflow
 
+# @@@SNIPEND
+# @@@SNIPSTART saga-py-worker-loop
 interrupt_event = asyncio.Event()
 
 
@@ -56,3 +58,4 @@ if __name__ == "__main__":
         print("\nInterrupt received, shutting down...\n")
         interrupt_event.set()
         loop.run_until_complete(loop.shutdown_asyncgens())
+# @@@SNIPEND

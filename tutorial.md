@@ -9,7 +9,7 @@ Instead of a single monolithic transaction, the Saga pattern breaks the transact
 Temporal orchestrates long-running transactions, automatically compensating for failures.
 The compensation, combined with the guarantee that the method will complete execution, makes this method a reliable, long-running transaction.
 
-In this guide, you'll build a Flask API that uses Temporal to manage the booking process for cars, hotels, and flights. 
+In this guide, you'll build a Flask API that uses Temporal to manage the booking process for cars, hotels, and flights.
 This approach ensures that even if one part of the booking fails, the system can gracefully handle the rollback of previous steps, maintaining data consistency.
 
 When you're finished, you'll be able to handle complex distributed transactions with ease and reliability using Temporal.
@@ -44,7 +44,6 @@ from shared import BookVacationInput
 The `asyncio` library is used for asynchronous operations.
 The `activity` module from the `temporalio` library provides decorators and functions for defining Activities.
 The `BookVacationInput` data class will be used to pass input data to the Activities.
-
 
 Next, define the `book_car`, `book_hotel`, and `book_flight` Activities.
 For brevity, these Activities will print a message indicating that they were invoked; however, in a real-world scenario, they would interact with external services to book the vacation.
@@ -402,11 +401,11 @@ This function expects to receive a `POST` request with the following JSON body:
 
 ```json
 {
-    "name": "User Name",
-    "attempts": 5,
-    "car": "valid-car-id",
-    "hotel": "valid-hotel-id",
-    "flight": "valid-flight-id"
+  "name": "User Name",
+  "attempts": 5,
+  "car": "valid-car-id",
+  "hotel": "valid-hotel-id",
+  "flight": "valid-flight-id"
 }
 ```
 
@@ -497,7 +496,6 @@ curl -X POST http://localhost:3002/book \
 }'
 ```
 
-
 You'll see a JSON response similar to the following:
 
 ```json
@@ -510,7 +508,6 @@ You'll see a JSON response similar to the following:
   "user_id": "john-doe-184942"
 }
 ```
-
 
 You've successfully initiated and completed your booking process using the Saga pattern with Temporal in Python.
 Next, you'll learn how to simulate errors to test the robustness of your implementation.
@@ -537,7 +534,6 @@ curl -X POST http://localhost:3002/book \
 ```
 
 The value `invalid` will trigger an exception, causing the booking to rollback.
-
 
 The output in your terminal will be a JSON response similar to the following:
 

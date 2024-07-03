@@ -1,24 +1,27 @@
 """
 Module to run the workflow.
 """
-
+# @@@SNIPSTART saga-py-starter-import
 import asyncio
 import uuid
 
 from flask import Flask, jsonify, request
 from temporalio.client import Client
-from temporalio.exceptions import ActivityError
 
 from shared import TASK_QUEUE_NAME, BookVacationInput
 from workflows import BookingWorkflow
 
 
+# @@@SNIPEND
+# @@@SNIPSTART saga-py-starter-initialize
 def create_app(temporal_client: Client):
     app = Flask(__name__)
 
     def generate_unique_username(name):
         return f'{name.replace(" ", "-").lower()}-{str(uuid.uuid4().int)[:6]}'
 
+    # @@@SNIPEND
+    # @@@SNIPSTART saga-py-starter-post
     @app.route("/book", methods=["POST"])
     async def book_vacation():
         """
@@ -61,17 +64,7 @@ def create_app(temporal_client: Client):
 async def main():
     temporal_client = await Client.connect("localhost:7233")
     app = create_app(temporal_client)
-    app.run(host="0.0.0.0", port=3002, debug=True)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
-
-
-async def main():
-    temporal_client = await Client.connect("localhost:7233")
-    app = create_app(temporal_client)
-    app.run(host="0.0.0.0", port=3002, debug=True)
+    app.run(host="0.0.0.0", debug=True)
 
 
 if __name__ == "__main__":
